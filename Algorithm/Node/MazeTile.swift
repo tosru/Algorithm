@@ -8,7 +8,7 @@
 
 import SpriteKit
 
-class Tile {
+class MazeTile {
   
   private(set) var node: SKSpriteNode
   private let goalTexture = SKTexture(imageNamed: "maze_goal")

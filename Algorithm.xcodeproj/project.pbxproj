@@ -11,13 +11,14 @@
 		D94948B423DBE911001C646C /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = D94948B323DBE911001C646C /* README.md */; };
 		D9BA9764245EA08E000243DB /* BubbleSortViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9BA9763245EA08E000243DB /* BubbleSortViewController.swift */; };
 		D9BA9766245EACFB000243DB /* BubbleSortScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9BA9765245EACFB000243DB /* BubbleSortScene.swift */; };
+		D9CF09A7246197AF001D90AF /* SortTile.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9CF09A6246197AF001D90AF /* SortTile.swift */; };
 		D9D0C9F421B23AC2008FC8DF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9D0C9F321B23AC2008FC8DF /* AppDelegate.swift */; };
 		D9D0C9F621B23AC2008FC8DF /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9D0C9F521B23AC2008FC8DF /* HomeViewController.swift */; };
 		D9D0C9FB21B23AC5008FC8DF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D9D0C9FA21B23AC5008FC8DF /* Assets.xcassets */; };
 		D9D0C9FE21B23AC5008FC8DF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D9D0C9FC21B23AC5008FC8DF /* LaunchScreen.storyboard */; };
 		D9E0EBFF24555CA5001062E4 /* PullingPoleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9E0EBFE24555CA5001062E4 /* PullingPoleViewController.swift */; };
 		D9E0EC0224555D1F001062E4 /* PullingPoleScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9E0EC0124555D1F001062E4 /* PullingPoleScene.swift */; };
-		D9E0EC0624555F0D001062E4 /* Tile.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9E0EC0524555F0D001062E4 /* Tile.swift */; };
+		D9E0EC0624555F0D001062E4 /* MazeTile.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9E0EC0524555F0D001062E4 /* MazeTile.swift */; };
 		D9E0EC082455617A001062E4 /* Stick.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9E0EC072455617A001062E4 /* Stick.swift */; };
 		D9E0EC0A245561A7001062E4 /* Disk.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9E0EC09245561A7001062E4 /* Disk.swift */; };
 		D9E0EC0C245561CF001062E4 /* TowerOfHanoiScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9E0EC0B245561CF001062E4 /* TowerOfHanoiScene.swift */; };
@@ -29,6 +30,7 @@
 		D94948B323DBE911001C646C /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		D9BA9763245EA08E000243DB /* BubbleSortViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BubbleSortViewController.swift; sourceTree = "<group>"; };
 		D9BA9765245EACFB000243DB /* BubbleSortScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BubbleSortScene.swift; sourceTree = "<group>"; };
+		D9CF09A6246197AF001D90AF /* SortTile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortTile.swift; sourceTree = "<group>"; };
 		D9D0C9F021B23AC2008FC8DF /* Algorithm.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Algorithm.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D9D0C9F321B23AC2008FC8DF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D9D0C9F521B23AC2008FC8DF /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
@@ -37,7 +39,7 @@
 		D9D0C9FF21B23AC5008FC8DF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D9E0EBFE24555CA5001062E4 /* PullingPoleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PullingPoleViewController.swift; sourceTree = "<group>"; };
 		D9E0EC0124555D1F001062E4 /* PullingPoleScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PullingPoleScene.swift; sourceTree = "<group>"; };
-		D9E0EC0524555F0D001062E4 /* Tile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tile.swift; sourceTree = "<group>"; };
+		D9E0EC0524555F0D001062E4 /* MazeTile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MazeTile.swift; sourceTree = "<group>"; };
 		D9E0EC072455617A001062E4 /* Stick.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stick.swift; sourceTree = "<group>"; };
 		D9E0EC09245561A7001062E4 /* Disk.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Disk.swift; sourceTree = "<group>"; };
 		D9E0EC0B245561CF001062E4 /* TowerOfHanoiScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TowerOfHanoiScene.swift; sourceTree = "<group>"; };
@@ -119,9 +121,10 @@
 		D9E0EC0424555EFF001062E4 /* Node */ = {
 			isa = PBXGroup;
 			children = (
-				D9E0EC0524555F0D001062E4 /* Tile.swift */,
+				D9E0EC0524555F0D001062E4 /* MazeTile.swift */,
 				D9E0EC072455617A001062E4 /* Stick.swift */,
 				D9E0EC09245561A7001062E4 /* Disk.swift */,
+				D9CF09A6246197AF001D90AF /* SortTile.swift */,
 			);
 			path = Node;
 			sourceTree = "<group>";
@@ -201,8 +204,9 @@
 				D9E0EBFF24555CA5001062E4 /* PullingPoleViewController.swift in Sources */,
 				D923487524553CDA00A47B77 /* Extension.swift in Sources */,
 				D9E0EC0224555D1F001062E4 /* PullingPoleScene.swift in Sources */,
-				D9E0EC0624555F0D001062E4 /* Tile.swift in Sources */,
+				D9E0EC0624555F0D001062E4 /* MazeTile.swift in Sources */,
 				D9BA9766245EACFB000243DB /* BubbleSortScene.swift in Sources */,
+				D9CF09A7246197AF001D90AF /* SortTile.swift in Sources */,
 				D9BA9764245EA08E000243DB /* BubbleSortViewController.swift in Sources */,
 				D9E0EC082455617A001062E4 /* Stick.swift in Sources */,
 				D9D0C9F621B23AC2008FC8DF /* HomeViewController.swift in Sources */,

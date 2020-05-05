@@ -30,7 +30,7 @@ class PullingPoleScene: SKScene {
   }
   
   private var mazeNumber: [[Int]] = []
-  private var mazeNodes: [[Tile]] = []
+  private var mazeNodes: [[MazeTile]] = []
   var mazeSize: Int!
   /// 通ることができる道
   private let path = 0
@@ -56,7 +56,7 @@ class PullingPoleScene: SKScene {
   
   func initValue() {
     removeAllChildren()
-    mazeNodes = [[Tile]]()
+    mazeNodes = [[MazeTile]]()
     mazeNumber = [[Int]]()
     xIndex = 2
     yIndex = 2
@@ -150,9 +150,9 @@ class PullingPoleScene: SKScene {
     let oneSideLengthTile = size.width / CGFloat(mazeSize)
     
     for y in 0..<mazeSize {
-      var tiles = [Tile]()
+      var tiles = [MazeTile]()
       for x in 0..<mazeSize {
-        let tile = Tile(size: CGSize(width: oneSideLengthTile, height: oneSideLengthTile))
+        let tile = MazeTile(size: CGSize(width: oneSideLengthTile, height: oneSideLengthTile))
         tile.node.anchorPoint = CGPoint(x: 0, y: 1.0) //左上
         tile.node.position = CGPoint(x: oneSideLengthTile * CGFloat(x), y: size.width - oneSideLengthTile * CGFloat(y) + PullingPoleScene.bottomSafeArea)
         tiles.append(tile)
