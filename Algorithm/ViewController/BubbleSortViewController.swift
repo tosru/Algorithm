@@ -21,6 +21,16 @@ class BubbleSortViewController: UIViewController {
     view.translatesAutoresizingMaskIntoConstraints = false
     return view
   }()
+  private let button: UIButton = {
+    let btn = UIButton()
+    btn.backgroundColor = .white
+    btn.setTitle("開始", for: .normal)
+    btn.setTitleColor(.black, for: .normal)
+    btn.layer.cornerRadius = 10
+    btn.layer.masksToBounds = true
+    btn.translatesAutoresizingMaskIntoConstraints = false
+    return btn
+  }()
   
   init(scene: BubbleSortScene) {
     self.scene = scene
@@ -50,6 +60,7 @@ class BubbleSortViewController: UIViewController {
     }
     
     setupPickerView()
+    setupButton()
   }
   
   private func setupPickerView() {
@@ -60,6 +71,18 @@ class BubbleSortViewController: UIViewController {
         pickerView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
         pickerView.widthAnchor.constraint(equalToConstant: view.frame.width / 2),
         pickerView.heightAnchor.constraint(equalToConstant: 100)
+      ]
+    )
+  }
+  
+  private func setupButton() {
+    view.addSubview(button)
+    NSLayoutConstraint.activate(
+      [
+        button.leadingAnchor.constraint(equalTo: pickerView.trailingAnchor, constant: 30),
+        button.widthAnchor.constraint(equalToConstant: 80),
+        button.heightAnchor.constraint(equalToConstant: 50),
+        button.centerYAnchor.constraint(equalTo: pickerView.centerYAnchor)
       ]
     )
   }
