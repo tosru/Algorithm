@@ -9,14 +9,17 @@
 import SpriteKit
 
 class SortTile {
-  var node: SKShapeNode
+  let node: SKShapeNode
   private var numberLabel: SKLabelNode
+  let numberOfText: Int
   
-  init(rect: CGRect, color: SKColor, textNumber: Int) {
-    node = SKShapeNode(rect: rect, cornerRadius: 3)
+  init(rect: CGRect, color: SKColor, numberOfText: Int) {
+    self.node = SKShapeNode(rect: rect, cornerRadius: 3)
+    self.numberOfText = numberOfText
+    
     node.fillColor = color
     node.lineWidth = 0
-    numberLabel = SKLabelNode(text: "\(textNumber)")
+    numberLabel = SKLabelNode(text: "\(numberOfText)")
     numberLabel.position = CGPoint(x: node.frame.midX, y: node.frame.midY)
     numberLabel.fontName = "HiraMaruProN-W4"
     numberLabel.verticalAlignmentMode = .center

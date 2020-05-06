@@ -11,7 +11,7 @@ import UIKit
 
 class BubbleSortViewController: UIViewController {
   
-  private let numberSquare = [3, 4, 5, 6, 7, 8]
+  private let pickerNumberOfTiles = [5, 6, 7, 8]
   private var scene: BubbleSortScene
   private lazy var pickerView: UIPickerView = {
     let view = UIPickerView()
@@ -94,16 +94,17 @@ extension BubbleSortViewController: UIPickerViewDataSource, UIPickerViewDelegate
   }
   
   func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-    return numberSquare.count
+    return pickerNumberOfTiles.count
   }
   
   func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-    return "\(numberSquare[row])個"
+    return "\(pickerNumberOfTiles[row])個"
   }
   
   func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
     // select something
-    print(numberSquare[row])
+    print(pickerNumberOfTiles[row])
+    scene.start(numberOfTiles: pickerNumberOfTiles[row])
   }
 }
 
