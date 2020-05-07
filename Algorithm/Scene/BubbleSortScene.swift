@@ -22,11 +22,12 @@ class BubbleSortScene: SKScene {
     .darkGray,
     .black
   ]
+  private var comparison: Comparison!
   
   override func didMove(to view: SKView) {
     super.didMove(to: view)
     backgroundColor = .lightGray
-    start(numberOfTiles: 5)
+    start(numberOfTiles: 8)
   }
   
   private func initValue() {
@@ -38,6 +39,7 @@ class BubbleSortScene: SKScene {
     initValue()
     generateTiles(numberOfTiles: numberOfTiles)
     drawTiles()
+    drawComparison(tileWidth: tiles[0].node.frame.width)
   }
   
   private func drawTiles() {
@@ -55,13 +57,20 @@ class BubbleSortScene: SKScene {
       return tile
     }
     tiles.shuffle()
-    setupNodePosition(side: side)
+    setupTilesPosition(side: side)
   }
   
-  private func setupNodePosition(side: CGFloat) {
+  private func setupTilesPosition(side: CGFloat) {
     for (i, tile) in tiles.enumerated() {
       let position = CGPoint(x: CGFloat(i) * side + 0, y: 70)
       tile.node.position = position
     }
+  }
+  
+  private func drawComparison(tileWidth: CGFloat) {
+    let offsetOfTile: CGFloat = 15
+    let position = CGPoint(x: tiles[0].node.frame.midX, y: 70 - offsetOfTile)
+    comparison = Comparison(width: tileWidth, position: position)
+    addChild(comparison.node)
   }
 }

@@ -36,6 +36,7 @@ class TowerOfHanoiViewController: UIViewController {
   
   override func loadView() {
     let skView = SKView(frame: UIScreen.main.bounds)
+    skView.ignoresSiblingOrder = true
     view = skView
   }
   

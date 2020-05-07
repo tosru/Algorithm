@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		D923487524553CDA00A47B77 /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D923487424553CDA00A47B77 /* Extension.swift */; };
+		D92828D52464238600D41372 /* Comparison.swift in Sources */ = {isa = PBXBuildFile; fileRef = D92828D42464238600D41372 /* Comparison.swift */; };
 		D94948B423DBE911001C646C /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = D94948B323DBE911001C646C /* README.md */; };
 		D9BA9764245EA08E000243DB /* BubbleSortViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9BA9763245EA08E000243DB /* BubbleSortViewController.swift */; };
 		D9BA9766245EACFB000243DB /* BubbleSortScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9BA9765245EACFB000243DB /* BubbleSortScene.swift */; };
@@ -27,6 +28,7 @@
 
 /* Begin PBXFileReference section */
 		D923487424553CDA00A47B77 /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
+		D92828D42464238600D41372 /* Comparison.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Comparison.swift; sourceTree = "<group>"; };
 		D94948B323DBE911001C646C /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		D9BA9763245EA08E000243DB /* BubbleSortViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BubbleSortViewController.swift; sourceTree = "<group>"; };
 		D9BA9765245EACFB000243DB /* BubbleSortScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BubbleSortScene.swift; sourceTree = "<group>"; };
@@ -125,6 +127,7 @@
 				D9E0EC072455617A001062E4 /* Stick.swift */,
 				D9E0EC09245561A7001062E4 /* Disk.swift */,
 				D9CF09A6246197AF001D90AF /* SortTile.swift */,
+				D92828D42464238600D41372 /* Comparison.swift */,
 			);
 			path = Node;
 			sourceTree = "<group>";
@@ -213,6 +216,7 @@
 				D9E0EC0A245561A7001062E4 /* Disk.swift in Sources */,
 				D9E0EC0E24556218001062E4 /* TowerOfHanoiViewController.swift in Sources */,
 				D9D0C9F421B23AC2008FC8DF /* AppDelegate.swift in Sources */,
+				D92828D52464238600D41372 /* Comparison.swift in Sources */,
 				D9E0EC0C245561CF001062E4 /* TowerOfHanoiScene.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
