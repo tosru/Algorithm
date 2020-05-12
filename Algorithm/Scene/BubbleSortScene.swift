@@ -23,23 +23,30 @@ class BubbleSortScene: SKScene {
     .black
   ]
   private var comparison: Comparison!
+  private var swapAtIndex: [(i: Int, j: Int)] = []
+  private var lhsAnimation: SKAction!
+  private var rhsAnimation: SKAction!
   
   override func didMove(to view: SKView) {
     super.didMove(to: view)
     backgroundColor = .lightGray
-    start(numberOfTiles: 8)
   }
   
   private func initValue() {
     removeAllActions()
     removeAllChildren()
+    swapAtIndex.removeAll()
   }
   
   func start(numberOfTiles: Int) {
     initValue()
     generateTiles(numberOfTiles: numberOfTiles)
+    generateAnimations()
     drawTiles()
     drawComparison(tileWidth: tiles[0].node.frame.width)
+    sort() {
+      self.swapAnimationAt(index: 0)
+    }
   }
   
   private func drawTiles() {
@@ -60,6 +67,15 @@ class BubbleSortScene: SKScene {
     setupTilesPosition(side: side)
   }
   
+  private func generateAnimations() {
+    let node = tiles[0].node
+    let rhsUpAction = SKAction.moveBy(x: 0, y: node.position.y, duration: 0.4)
+    let rhsSlideAction = SKAction.moveBy(x: -1 * node.frame.width, y: 0, duration: 0.2)
+    let rhsDownAction = SKAction.moveBy(x: 0, y: -1 * node.position.y, duration: 0.4)
+    lhsAnimation = SKAction.moveBy(x: node.frame.width, y: 0, duration: 1.0)
+    rhsAnimation = SKAction.sequence([rhsUpAction, rhsSlideAction, rhsDownAction])
+  }
+  
   private func setupTilesPosition(side: CGFloat) {
     for (i, tile) in tiles.enumerated() {
       let position = CGPoint(x: CGFloat(i) * side + 0, y: 70)
@@ -72,5 +88,33 @@ class BubbleSortScene: SKScene {
     let position = CGPoint(x: tiles[0].node.frame.midX, y: 70 - offsetOfTile)
     comparison = Comparison(width: tileWidth, position: position)
     addChild(comparison.node)
+  }
+  
+  private func sort(completion: @escaping () -> Void) {
+    var copyTiles = tiles
+    l: for _ in 0..<copyTiles.count - 1 {
+      var count = 0
+      for i in 0..<copyTiles.count - 1 {
+        if copyTiles[i].numberOfText > copyTiles[i+1].numberOfText {
+          copyTiles.swapAt(i, i + 1)
+          swapAtIndex.append((i, i + 1))
+          count += 1
+        }
+        if count == 0 && (i + 1 == copyTiles.count - 1) { break l }
+      }
+    }
+    completion()
+  }
+  
+  private func swapAnimationAt(index: Int) {
+    if swapAtIndex.count == index { return }
+    let i = swapAtIndex[index].i
+    let j = swapAtIndex[index].j
+    let lhs = tiles[i], rhs = tiles[j]
+    rhs.node.run(rhsAnimation)
+    lhs.node.run(lhsAnimation) {
+      self.tiles.swapAt(i, j)
+      self.swapAnimationAt(index: index + 1)
+    }
   }
 }

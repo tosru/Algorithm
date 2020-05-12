@@ -42,13 +42,13 @@ class Comparison {
     node.addChild(rightBar)
   }
   
-  func toRight() {
+  func moveToRight() {
     let newXPoint = node.position.x + tileWidth
     let action = SKAction.moveTo(x: newXPoint, duration: 0.5)
     node.run(action)
   }
   
-  func toInitPosition() {
+  func moveToInitPosition() {
     
   }
   

@@ -104,7 +104,6 @@ extension BubbleSortViewController: UIPickerViewDataSource, UIPickerViewDelegate
   
   func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
     // select something
-    print(pickerNumberOfTiles[row])
     scene.start(numberOfTiles: pickerNumberOfTiles[row])
   }
 }
