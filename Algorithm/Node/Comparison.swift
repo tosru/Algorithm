@@ -14,10 +14,13 @@ class Comparison {
   private let rightBar: SKShapeNode
   private let initPosition: CGPoint
   private let tileWidth: CGFloat
+  private let numberOfTiles: Int
+  private var moveCount = 0
   
-  init(width: CGFloat, position: CGPoint) {
+  init(width: CGFloat, position: CGPoint, numberOfTiles: Int) {
     let barWidth: CGFloat = 10
     let barHeight: CGFloat = 35
+    self.numberOfTiles = numberOfTiles
     self.tileWidth = width
     self.node = SKShapeNode(rect: CGRect(x: 0, y: 0, width: width, height: barWidth))
     self.leftBar = SKShapeNode(rect: CGRect(x: 0, y: 0, width: barWidth, height: barHeight))
@@ -42,14 +45,24 @@ class Comparison {
     node.addChild(rightBar)
   }
   
-  func moveToRight() {
+  func move() {
+    if moveCount == numberOfTiles - 2 {
+      moveToInitPosition()
+      moveCount = 0
+    } else {
+      moveToRight()
+      moveCount += 1
+    }
+  }
+  
+  private func moveToRight() {
     let newXPoint = node.position.x + tileWidth
-    let action = SKAction.moveTo(x: newXPoint, duration: 0.5)
+    let action = SKAction.moveTo(x: newXPoint, duration: 0.95)
     node.run(action)
   }
   
-  func moveToInitPosition() {
-    
+  private func moveToInitPosition() {
+    let action = SKAction.move(to: initPosition, duration: 0.95)
+    node.run(action)
   }
-  
 }

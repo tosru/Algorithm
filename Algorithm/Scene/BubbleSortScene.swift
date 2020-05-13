@@ -26,6 +26,7 @@ class BubbleSortScene: SKScene {
   private var swapAtIndex: [(i: Int, j: Int)] = []
   private var lhsAnimation: SKAction!
   private var rhsAnimation: SKAction!
+  private var waitAnimation: SKAction!
   
   override func didMove(to view: SKView) {
     super.didMove(to: view)
@@ -43,7 +44,7 @@ class BubbleSortScene: SKScene {
     generateTiles(numberOfTiles: numberOfTiles)
     generateAnimations()
     drawTiles()
-    drawComparison(tileWidth: tiles[0].node.frame.width)
+    drawComparison()
     sort() {
       self.swapAnimationAt(index: 0)
     }
@@ -58,9 +59,9 @@ class BubbleSortScene: SKScene {
   private func generateTiles(numberOfTiles: Int) {
     let side: CGFloat = frame.size.width / CGFloat(numberOfTiles)
     let rect = CGRect(x: 0, y: 0, width: side, height: side)
-    tiles = (1...numberOfTiles).map { numberOfText in
-      let color = colors[numberOfText - 1]
-      let tile = SortTile(rect: rect, color: color, numberOfText: numberOfText)
+    tiles = (1...numberOfTiles).map { numberForText in
+      let color = colors[numberForText - 1]
+      let tile = SortTile(rect: rect, color: color, numberForText: numberForText)
       return tile
     }
     tiles.shuffle()
@@ -69,11 +70,13 @@ class BubbleSortScene: SKScene {
   
   private func generateAnimations() {
     let node = tiles[0].node
-    let rhsUpAction = SKAction.moveBy(x: 0, y: node.position.y, duration: 0.4)
+    let distance = node.frame.height + 10
+    let rhsUpAction = SKAction.moveBy(x: 0, y: distance, duration: 0.4)
     let rhsSlideAction = SKAction.moveBy(x: -1 * node.frame.width, y: 0, duration: 0.2)
-    let rhsDownAction = SKAction.moveBy(x: 0, y: -1 * node.position.y, duration: 0.4)
+    let rhsDownAction = SKAction.moveBy(x: 0, y: -1 * distance, duration: 0.35)
     lhsAnimation = SKAction.moveBy(x: node.frame.width, y: 0, duration: 1.0)
     rhsAnimation = SKAction.sequence([rhsUpAction, rhsSlideAction, rhsDownAction])
+    waitAnimation = SKAction.wait(forDuration: 1.0)
   }
   
   private func setupTilesPosition(side: CGFloat) {
@@ -83,10 +86,11 @@ class BubbleSortScene: SKScene {
     }
   }
   
-  private func drawComparison(tileWidth: CGFloat) {
+  private func drawComparison() {
     let offsetOfTile: CGFloat = 15
-    let position = CGPoint(x: tiles[0].node.frame.midX, y: 70 - offsetOfTile)
-    comparison = Comparison(width: tileWidth, position: position)
+    let tileFrame = tiles[0].node.frame
+    let position = CGPoint(x: tileFrame.midX, y: 70 - offsetOfTile)
+    comparison = Comparison(width: tileFrame.width, position: position, numberOfTiles: tiles.count)
     addChild(comparison.node)
   }
   
@@ -95,11 +99,15 @@ class BubbleSortScene: SKScene {
     l: for _ in 0..<copyTiles.count - 1 {
       var count = 0
       for i in 0..<copyTiles.count - 1 {
-        if copyTiles[i].numberOfText > copyTiles[i+1].numberOfText {
+        if copyTiles[i].numberForText > copyTiles[i+1].numberForText {
           copyTiles.swapAt(i, i + 1)
           swapAtIndex.append((i, i + 1))
           count += 1
+        } else {
+          // swapしない場合は、同じindexを追加する
+          swapAtIndex.append((i, i))
         }
+        // sortが完了しているなら抜ける
         if count == 0 && (i + 1 == copyTiles.count - 1) { break l }
       }
     }
@@ -108,13 +116,23 @@ class BubbleSortScene: SKScene {
   
   private func swapAnimationAt(index: Int) {
     if swapAtIndex.count == index { return }
+    let comparisonAnimation = SKAction.run { self.comparison.move() }
+    let groupAnimation = SKAction.group([comparisonAnimation, waitAnimation])
     let i = swapAtIndex[index].i
     let j = swapAtIndex[index].j
-    let lhs = tiles[i], rhs = tiles[j]
-    rhs.node.run(rhsAnimation)
-    lhs.node.run(lhsAnimation) {
-      self.tiles.swapAt(i, j)
-      self.swapAnimationAt(index: index + 1)
+    if i != j {
+      // swapさせる場合は、1秒移動、1秒待機(その間にcomparisonを移動させる)
+      let lhs = tiles[i], rhs = tiles[j]
+      rhs.node.run(SKAction.sequence([rhsAnimation, waitAnimation]))
+      lhs.node.run(SKAction.sequence([lhsAnimation, groupAnimation])) {
+        self.tiles.swapAt(i, j)
+        self.swapAnimationAt(index: index + 1)
+      }
+    } else {
+      // swapさせない場合は、2秒待機(その間にcomparisonを移動させる)
+      scene?.run(SKAction.sequence([waitAnimation, groupAnimation])) {
+        self.swapAnimationAt(index: index + 1)
+      }
     }
   }
 }

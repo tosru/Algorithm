@@ -11,15 +11,15 @@ import SpriteKit
 class SortTile {
   let node: SKShapeNode
   private var numberLabel: SKLabelNode
-  let numberOfText: Int
+  let numberForText: Int
   
-  init(rect: CGRect, color: SKColor, numberOfText: Int) {
+  init(rect: CGRect, color: SKColor, numberForText: Int) {
     self.node = SKShapeNode(rect: rect, cornerRadius: 3)
-    self.numberOfText = numberOfText
+    self.numberForText = numberForText
     
     node.fillColor = color
     node.lineWidth = 0
-    numberLabel = SKLabelNode(text: "\(numberOfText)")
+    numberLabel = SKLabelNode(text: "\(numberForText)")
     numberLabel.position = CGPoint(x: node.frame.midX, y: node.frame.midY)
     numberLabel.fontName = "HiraMaruProN-W4"
     numberLabel.verticalAlignmentMode = .center
