@@ -96,19 +96,20 @@ class BubbleSortScene: SKScene {
   
   private func sort(completion: @escaping () -> Void) {
     var copyTiles = tiles
+    // TODO: ループ回数を減らすために、copyTiles.count-1-iとする その際、swapAtIndexの要素数が減ることを考慮する
     l: for _ in 0..<copyTiles.count - 1 {
       var count = 0
-      for i in 0..<copyTiles.count - 1 {
-        if copyTiles[i].numberForText > copyTiles[i+1].numberForText {
-          copyTiles.swapAt(i, i + 1)
-          swapAtIndex.append((i, i + 1))
+      for j in 0..<copyTiles.count - 1 {
+        if copyTiles[j].numberForText > copyTiles[j+1].numberForText {
+          copyTiles.swapAt(j, j + 1)
+          swapAtIndex.append((j, j + 1))
           count += 1
         } else {
           // swapしない場合は、同じindexを追加する
-          swapAtIndex.append((i, i))
+          swapAtIndex.append((j, j))
         }
         // sortが完了しているなら抜ける
-        if count == 0 && (i + 1 == copyTiles.count - 1) { break l }
+        if count == 0 && (j + 1 == copyTiles.count - 1) { break l }
       }
     }
     completion()
