@@ -13,6 +13,7 @@ protocol StatusLabelDelegate: AnyObject {
 }
 
 enum Status: String {
+  case initial
   case processing = "処理中"
   case running = "実行中"
   case end = "終了"

@@ -12,6 +12,7 @@ import UIKit
 class BubbleSortViewController: UIViewController {
   
   private let pickerNumberOfTiles = [5, 6, 7, 8]
+  private var selectedPickerNumber = 7
   private var scene: BubbleSortScene
   private lazy var pickerView: UIPickerView = {
     let view = UIPickerView()
@@ -30,6 +31,13 @@ class BubbleSortViewController: UIViewController {
     btn.layer.masksToBounds = true
     btn.translatesAutoresizingMaskIntoConstraints = false
     return btn
+  }()
+  private let statusLabel: UILabel = {
+    let label = UILabel()
+    label.textAlignment = .center
+    label.isHidden = true
+    label.translatesAutoresizingMaskIntoConstraints = false
+    return label
   }()
   
   init(scene: BubbleSortScene) {
@@ -59,9 +67,10 @@ class BubbleSortViewController: UIViewController {
     if #available(iOS 11.0, *) {
       navigationItem.largeTitleDisplayMode = .never
     }
-    
+    scene.myDelegate = self
     setupPickerView()
     setupButton()
+    setupStatusLabel()
   }
   
   private func setupPickerView() {
@@ -78,6 +87,7 @@ class BubbleSortViewController: UIViewController {
   
   private func setupButton() {
     view.addSubview(button)
+    button.addTarget(self, action: #selector(handleButton), for: .touchUpInside)
     NSLayoutConstraint.activate(
       [
         button.leadingAnchor.constraint(equalTo: pickerView.trailingAnchor, constant: 30),
@@ -86,6 +96,34 @@ class BubbleSortViewController: UIViewController {
         button.centerYAnchor.constraint(equalTo: pickerView.centerYAnchor)
       ]
     )
+  }
+  
+  private func setupStatusLabel() {
+    view.addSubview(statusLabel)
+    statusLabel.font = UIFont.hiramaru(size: 35)
+    NSLayoutConstraint.activate(
+      [
+        statusLabel.centerXAnchor.constraint(equalTo: pickerView.centerXAnchor),
+        statusLabel.centerYAnchor.constraint(equalTo: pickerView.centerYAnchor),
+        statusLabel.widthAnchor.constraint(equalTo: pickerView.widthAnchor),
+        statusLabel.heightAnchor.constraint(equalTo: pickerView.heightAnchor)
+      ]
+    )
+  }
+  
+  @objc private func handleButton() {
+    switch scene.status {
+    case .initial:
+      pickerView.isHidden = true
+      statusLabel.isHidden = false
+      scene.start(numberOfTiles: selectedPickerNumber)
+      button.setTitle("消す", for: .normal)
+    case .processing, .running, .end:
+      statusLabel.isHidden = true
+      pickerView.isHidden = false
+      scene.clear()
+      button.setTitle("開始", for: .normal)
+    }
   }
 }
 
@@ -103,8 +141,12 @@ extension BubbleSortViewController: UIPickerViewDataSource, UIPickerViewDelegate
   }
   
   func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-    // select something
-    scene.start(numberOfTiles: pickerNumberOfTiles[row])
+    selectedPickerNumber = pickerNumberOfTiles[row]
   }
 }
 
+extension BubbleSortViewController: StatusLabelDelegate {
+  func changeStatusLabelText() {
+    statusLabel.text = scene.status.rawValue
+  }
+}

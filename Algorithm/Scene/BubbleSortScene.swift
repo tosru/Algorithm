@@ -9,7 +9,7 @@
 import SpriteKit
 
 class BubbleSortScene: SKScene {
-  private(set) var status: Status = .processing
+  private(set) var status: Status = .initial
   weak var myDelegate: StatusLabelDelegate?
   private var tiles: [SortTile] = []
   private let colors: [UIColor] = [
@@ -40,6 +40,8 @@ class BubbleSortScene: SKScene {
   }
   
   func start(numberOfTiles: Int) {
+    status = .running
+    myDelegate?.changeStatusLabelText()
     initValue()
     generateTiles(numberOfTiles: numberOfTiles)
     generateAnimations()
@@ -48,6 +50,11 @@ class BubbleSortScene: SKScene {
     sort() {
       self.swapAnimationAt(index: 0)
     }
+  }
+  
+  func clear() {
+    status = .initial
+    initValue()
   }
   
   private func drawTiles() {
@@ -116,7 +123,11 @@ class BubbleSortScene: SKScene {
   }
   
   private func swapAnimationAt(index: Int) {
-    if swapAtIndex.count == index { return }
+    if swapAtIndex.count == index {
+      status = .end
+      myDelegate?.changeStatusLabelText()
+      return
+    }
     let comparisonAnimation = SKAction.run { self.comparison.move() }
     let groupAnimation = SKAction.group([comparisonAnimation, waitAnimation])
     let i = swapAtIndex[index].i
